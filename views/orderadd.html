@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>新增订单</title>
+    <style>
+        .inpgroup{
+            height: 20px;
+            width: 500px;
+            margin-top: 20px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        .inpgroup input{
+            height: 30px;
+            width: 200px;
+            font-size: 20px;
+        }
+        button{
+            height: 40px;
+            width: 100px;
+            margin-top:40px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <form id="editform" action="postServlet2" method="post">
+
+    </form>
+    <form id="changefrom">
+        <div class="inpgroup">
+            <span class="loginIco1">订单号:</span>
+            <input type="text" id="orderid" name="orderid" >
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">购买书籍:</span>
+            <input type="text" id="bookname" name="bookname">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">购买时间:</span>
+            <input type="text" id="ordertime" name="ordertime" >
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">购买人:</span>
+            <input type="text" id="purchaser" name="purchaser" >
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">邮寄地址:</span>
+            <input type="text" id="purchaseraddress" name="purchaseraddress">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">联系电话:</span>
+            <input type="text" id="purchaserphone" name="purchaserphone" >
+        </div>
+        
+        <button class="submit" type="submit">添加</button>
+    </form>
+</body>
+<script src="../public/js/jquery.js"></script>
+<script>
+    $('#changefrom').on('submit', function (e) {
+            var orderid = document.getElementById("orderid").value;
+            var bookname = document.getElementById("bookname").value;
+            var ordertime = document.getElementById("ordertime").value;
+            var purchaser = document.getElementById("purchaser").value;
+            var purchaseraddress = document.getElementById("purchaseraddress").value;
+            var purchaserphone = document.getElementById("purchaserphone").value;
+
+
+            var data = $.param({"orderid":orderid}) + "&"+$.param({"bookname":bookname}) 
+            + "&"+$.param({"ordertime":ordertime}) + "&" +$.param({"purchaser":purchaser}) 
+            + "&"+$.param({"purchaseraddress":purchaseraddress}) + "&" +$.param({"purchaserphone":purchaserphone})
+            + "&"+ $("#editform").serialize() + "";
+
+			$.ajax({
+                url: '/orderchange',
+                type: 'post',
+                data: data,
+                processData:false,
+                success: function (data) {
+                    var err_code = data.err_code
+                    console.log(data)
+                    if (err_code === 0) {
+                        window.alert('添加成功!');
+                    } else if (err_code === 1) {
+                        window.alert('输入数据有误。添加失败！')
+                    }
+                  
+                }
+            })
+        })
+</script>
+</html>

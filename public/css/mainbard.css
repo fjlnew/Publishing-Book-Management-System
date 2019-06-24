@@ -1,0 +1,239 @@
+html,body{
+	height: 100%;
+	overflow: hidden;
+}
+body{
+	background: url(../iamge/loginbg.jpg);
+	background-size: 100% 100%;
+}
+.wp{
+	height: 100%;
+	position: relative;
+	z-index: 2;
+}
+#particles-js{
+	position: absolute;
+	top: 0;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0.5;
+}
+.centermain{
+	width: 90%;
+	height: 90%;
+	min-height: 500px;
+	min-width: 1000px;
+	margin: 0 auto;
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.right{
+	position: absolute;
+	height: 100%;
+	width: 20%;
+	background-color: rgba(255,255,255,0.1);
+}
+.left{
+	margin-left: 20%;
+	height: 100%;
+	width: 80%;
+	background-color: rgba(255,255,255,0.2);
+}
+.centermain .right div{
+	width: 100%;
+	height: 70px;
+}
+.centermain .right {
+	text-align: center;
+	font-size: 20px;
+}
+a:hover{
+	color: black;
+	cursor:pointer
+}
+.centermain .left {
+	position: absolute;
+	overflow: hidden;
+}
+.centermain .left .biggest {
+	height: 100%;
+	width: 100%;
+}
+
+
+.centermain .left .biggest div{
+	margin-left: 5%;
+	height: 100%;
+	width: 90%;
+	background-color: #2A658A;
+	opacity: 0.7;
+}
+.centermain .right .photo{
+	height: 250px;
+	width: 80%;
+	margin-top: 30px;
+}
+.centermain .right .photo img{
+	height: 100%;
+	width: 100%;
+	margin: 0px 10%;
+	opacity: 0.5;
+}
+.table1 th{
+	height: 64px;
+}
+.table1 tr td{
+    height: 64px;
+}
+
+.alltable{
+	width:100% !important;
+	height: calc(100% - 55px) !important;
+	margin-left: 0% !important;
+    overflow:scroll;
+	background-color: bisque;
+	font-size: 20px;
+}
+.table1{
+    width:100%;
+    text-align:center;
+}
+
+.leftphoto{
+	margin-left: calc(50% - 150px);
+	margin-top: 15px;
+	height:40px;
+}
+
+#selecbooks-left{
+	font-size: 30px;
+}
+#selecbooks-left input{
+	height: 40px;
+	width: 400px;
+	background-color: rgb(95, 97, 209) ;
+	font-size: 27px;
+	opacity: 0.6;
+}
+#selecbooks-left button{
+	height: 40px;
+	width: 200px;
+	background-color: rgb(54, 134, 180) ;
+	font-size: 27px;
+	opacity: 0.6;
+}
+#selecbooks-left button:hover{
+	background-color: rgb(43, 9, 240);
+	color: white;
+	cursor: pointer
+}
+.selectdiv{
+	height: 60px !important;
+}
+.alltable002{
+	width:100% !important;
+	height: calc(100% - 117px) !important;
+	margin-left: 0% !important;
+    overflow:scroll;
+	font-size: 20px;
+}
+
+.alltable002 th{
+	height: 64px;
+}
+.alltable002 tr td{
+    height: 64px;
+}
+#maintenance-left {
+	background-color:transparent !important;
+}
+
+#maintenance-left #passwordchange{
+	height: 400px;
+	width: 400px;
+	margin-left: calc(50% - 200px) !important;
+	margin-top: calc(50% - 500px) !important;
+}
+#mima img{
+	margin-left: 40px;
+}
+#maintenance-left #passwordchange span{
+	font-size: 25px;
+	margin-top: 30px;
+	margin-left: 40px;
+}
+#maintenance-left #passwordchange input{
+	height: 25px;
+	width: 240px;
+	margin-top: 30px;
+	font-size: 25px;
+}
+#maintenance-left #passwordchange button{
+	height: 50px;
+	width: 300px;
+	opacity: 0.6;
+	background-color: aqua;
+	margin-top: 30px;
+	margin-left: 50px;
+	border-radius: 20px;
+}
+#maintenance-left #passwordchange button:hover{
+	background-color: rgb(43, 9, 240);
+	color: white;
+	cursor: pointer
+}
+
+.addstylebutton{
+	height: 30px;
+	width: 100px;
+	background-color: aqua;
+	color: white;
+	border-radius: 20px;
+	margin-top: 20px;
+}
+.addstylebutton:hover{
+	background-color: rgb(53, 24, 214);
+	cursor: pointer;
+}
+
+.leixing{
+	height: 30px !important;
+	width: 30px !important;
+	background-color: white !important;
+	border-radius: 50%;
+	margin-left: 20px;
+}
+.leix:hover{
+	cursor: pointer;
+}
+.leix{
+	font-size: 30px !important;
+}
+#shu{
+	background-color: rgb(12, 4, 245);
+}
+
+
+.alltable003{
+	width:100% !important;
+	height: calc(100% - 200px) !important;
+	margin-left: 0% !important;
+	margin-top: 87px;
+    overflow:scroll;
+	font-size: 20px;
+}
+
+.alltable003 th{
+	height: 64px;
+}
+.alltable003 tr td{
+    height: 64px;
+}

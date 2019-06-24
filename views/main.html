@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../public/css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../public/css/mainbard.css" />
+	<link rel="stylesheet" type="text/css" href="../public/css/animation.css" />
+</head>
+
+<body>
+	<div class="wp animsition">
+		<div class="centermain">
+			<div class="right">
+				<div class="photo">
+					<img src="../public/iamge/123.jpg" alt="">
+				</div>
+				<div id="hello">
+					{{ if islogin }}
+					欢迎您！{{ islogin[0].managername }}管理员!
+					{{ else }}
+					你好！
+					{{ /if }}
+				</div>
+				<div>
+					<a onclick="fun(0)">出版图书的信息管理</a>
+				</div>
+				<div id=" Publishers">
+					<a onclick="fun(1)">出版社基础信息管理</a>
+				</div>
+				<div id="writers">
+					<a onclick="fun(2)">作者基础信息管理</a>
+				</div>
+				<div id="views">
+					<a onclick="fun(3)">图书订购信息</a>
+				</div>
+				<div id="selecbooks">
+					<a onclick="fun(4)">信息的查询与统计</a>
+				</div>
+				<div id="maintenance">
+					<a onclick="fun(5)">系统维护(修改密码)</a>
+				</div>
+				<div id="zhuxiao1">
+					<a href="/zhuxiao" onclick="return confirm('确认注销?')">注销</a>
+				</div>
+			</div>
+			<div class="left">
+				<div id="biggest" class="biggest">
+					<div id="books-left">
+						<img class="leftphoto" src="../public/iamge/pic001.png" alt="">
+						<button class="addstylebutton" type="button" onclick="bookadd()">新增图书</button>
+						<div class="alltable">
+							<table class="table1" id="dataTableDetail" cellspacing="0">
+
+								<tr>
+									<th>书籍名称</th>
+									<th>书籍编号</th>
+									<th>作者名称</th>
+									<th>出版社名称</th>
+									<th>出版时间</th>
+									<th>书籍剩余数量</th>
+									<th>书籍价格</th>
+									<th>修改</th>
+									<th>删除</th>
+								</tr>
+								{{ each books }}
+								<tr>
+									<td>{{ $value.bookname }}</td>
+									<td>{{ $value.bookid }}</td>
+									<td>{{ $value.authorname }}</td>
+									<td>{{ $value.pressname }}</td>
+									<td>{{ $value.booktime }}</td>
+									<td>{{ $value.booknum }}</td>
+									<td>{{ $value.price}}</td>
+									<td>
+										<a index="{{ $value.bookid }}" onclick=bookchange(this)>修改</a>
+									</td>
+									<td>
+										<a href="/main/bookdelete?bookid={{ $value.bookid }}"
+											onclick="return confirm('确定删除该记录吗?')">删除</a>
+									</td>
+								</tr>
+								{{ /each }}
+							</table>
+						</div>
+					</div>
+					<div id="Publishers-left">
+						<img class="leftphoto" src="../public/iamge/pic002.png" alt="">
+						<button class="addstylebutton" type="button" onclick="Publishersadd()">新增出版社</button>
+						<div class="alltable">
+							<table class="table1" id="dataTableDetail" cellspacing="0">
+
+								<tr>
+									<th>出版社名称</th>
+									<th>出版社编号</th>
+									<th>出版社地址</th>
+									<th>修改</th>
+									<th>删除</th>
+								</tr>
+								{{ each press }}
+								<tr>
+									<td>{{ $value.pressname }}</td>
+									<td>{{ $value.pressid }}</td>
+									<td>{{ $value.pressaddress }}</td>
+									<td>
+										<a index="{{ $value.pressid }}" onclick=Publisherschange(this)>修改</a>
+									</td>
+									<td>
+										<a href="/press/pressdelete?pressid={{ $value.pressid }}"
+											onclick="return confirm('确定删除该记录吗?')">删除</a>
+									</td>
+								</tr>
+								{{ /each }}
+							</table>
+						</div>
+					</div>
+					<div id="writers-left">
+						<img class="leftphoto" src="../public/iamge/pic003.png" alt="">
+						<button class="addstylebutton" type="button" onclick="writersadd()">新增作者</button>
+						<div class="alltable">
+							<table class="table1" id="dataTableDetail" cellspacing="0">
+
+								<tr>
+									<th>作者名称</th>
+									<th>作者性别</th>
+									<th>作者电话</th>
+									<th>作者年龄</th>
+									<th>修改</th>
+									<th>删除</th>
+								</tr>
+								{{ each author }}
+								<tr>
+									<td>{{ $value.authorname }}</td>
+									<td>{{ $value.authorsix }}</td>
+									<td>{{ $value.authorphone }}</td>
+									<td>{{ $value.authorage }}</td>
+									<td>
+										<a index="{{ $value.authorphone }}" onclick=authorschange(this)>修改</a>
+									</td>
+									<td>
+										<a href="/author/authordelete?authorphone={{ $value.authorphone }}"
+											onclick="return confirm('确定删除该记录吗?')">删除</a>
+									</td>
+								</tr>
+								{{ /each }}
+							</table>
+						</div>
+					</div>
+					<div id="views-left">
+						<img class="leftphoto" src="../public/iamge/pic004.png" alt="">
+						<button class="addstylebutton" type="button" onclick="orderadd()">新增订单</button>
+						<div class="alltable">
+							<table class="table1" id="dataTableDetail" cellspacing="0">
+
+								<tr>
+									<th>订单号</th>
+									<th>书籍名称</th>
+									<th>购买时间</th>
+									<th>购买者姓名</th>
+									<th>邮寄地址</th>
+									<th>联系方式</th>
+									<th>修改</th>
+									<th>删除</th>
+								</tr>
+								{{ each order }}
+								<tr>
+									<td>{{ $value.orderid }}</td>
+									<td>{{ $value.bookname }}</td>
+									<td>{{ $value.ordertime }}</td>
+									<td>{{ $value.purchaser }}</td>
+									<td>{{ $value.purchaseraddress }}</td>
+									<td>{{ $value.purchaserphone }}</td>
+									<td>
+										<a index="{{ $value.orderid }}" onclick=orderchange(this)>修改</a>
+									</td>
+									<td>
+										<a href="/order/orderdelete?orderid={{ $value.orderid }}"
+											onclick="return confirm('确定删除该记录吗?')">删除</a>
+									</td>
+								</tr>
+								{{ /each }}
+							</table>
+						</div>
+					</div>
+					<div id="selecbooks-left">
+						<img class="leftphoto" src="../public/iamge/pic110.png" alt="">
+						<div class="selectdiv">
+							<form id="editform" action="postServlet2" method="post">
+
+							</form>
+							<form id="bookname">
+								<span>查询关键字：</span>
+								<input type="text" id="selsectbookname">
+								<button type="button" onclick="bookfind()">查询</button>
+							</form>
+							<input type="radio" class="leixing" name="leixing" value="1" onclick="chax(1)" checked><span  id="shu" class="leix">书籍查询</span> 
+							<input type="radio" class="leixing" name="leixing" value="2" onclick="chax(2)"><span  id="she" class="leix" >出版社查询</span>
+							<input type="radio" class="leixing" name="leixing" value="3" onclick="chax(3)"><span id="zuo" class="leix" >作者查询</span>
+							<input type="radio" class="leixing" name="leixing" value="4"  onclick="chax(4)"><span id="ding" class="leix">订单查询</span>
+							
+
+						</div>
+
+						<div class="alltable003">
+							<table class="table1" id="dataTableDetail" cellspacing="0">
+								
+								<tbody id="main">
+										<tr>
+
+										</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div id="maintenance-left">
+						<div id="passwordchange">
+								<form id="mima">
+									<img src="../public/iamge/pic10.png" alt="">
+									
+									<span id="mangerid" class="mima">管理员编号：</span>
+									{{ if islogin }}
+									欢迎您！{{ islogin[0].managerid }}号管理员!
+									{{ else }}
+									你好！
+									{{ /if }}
+									<br>
+								
+									<span class="mima">旧密码：</span>
+									<input type="password" id="oldpassworld" placeholder="请输入您的旧密码">
+									<br>
+
+									<span class="mima">新密码：</span>
+									<input type="password" id="newpassworld1" placeholder="请输入您的新密码">
+									<br>
+
+									<span class="mima">新密码：</span>
+									<input type="password" id="newpassworld2" placeholder="请输入您的新密码">
+									<br>
+
+									<button index={{ islogin[0].managerid }} type="button" onclick="passwordchange(this)">修改</button>
+								</form>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div id="particles-js"></div>
+
+</body>
+<script type="text/javascript" src="../public/js/jquery.js"></script>
+<script type="text/javascript" src="../public/js/jquery.animation.js"></script>
+<script type="text/javascript" src="../public/js/particles.js"></script>
+<script type="text/javascript" src="../public/js/style.js"></script>
+<script type="text/javascript">
+	$(".animsition").animsition();
+</script>
+
+<script type="text/javascript">
+	function chax(a){
+		if(a == 1){
+			document.getElementById("shu").style.backgroundColor = 'rgb(12, 4, 245)';
+			document.getElementById("she").style.backgroundColor = 'transparent';
+			document.getElementById("zuo").style.backgroundColor = 'transparent';
+			document.getElementById("ding").style.backgroundColor = 'transparent';
+		}else if(a == 2){
+			document.getElementById("shu").style.backgroundColor = 'transparent';
+			document.getElementById("she").style.backgroundColor = 'rgb(12, 4, 245)';
+			document.getElementById("zuo").style.backgroundColor = 'transparent';
+			document.getElementById("ding").style.backgroundColor = 'transparent';
+		}else if(a == 3){
+			document.getElementById("shu").style.backgroundColor = 'transparent';
+			document.getElementById("she").style.backgroundColor = 'transparent';
+			document.getElementById("zuo").style.backgroundColor = 'rgb(12, 4, 245)';
+			document.getElementById("ding").style.backgroundColor = 'transparent';
+		}else if(a == 4){
+			document.getElementById("shu").style.backgroundColor = 'transparent';
+			document.getElementById("she").style.backgroundColor = 'transparent';
+			document.getElementById("zuo").style.backgroundColor = 'transparent';
+			document.getElementById("ding").style.backgroundColor = 'rgb(12, 4, 245)';
+		}
+	}
+
+	var oldwhaer = 0;
+	function fun(a) {
+		var height = document.getElementById("biggest").offsetHeight;
+		var newheinght = (a - oldwhaer) * (-1) * height;
+		document.getElementById("books-left").style.marginTop = (newheinght + 'px');
+	}
+	function bookadd(){
+		window.open(`/bookadd`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+	function bookchange(e) {
+		var id = e.getAttribute('index');
+		window.open(`/bookchange?bookid=${id}`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+	function Publishersadd(e) {
+		window.open(`/Publishersadd`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+	function Publisherschange(e) {
+		var id = e.getAttribute('index');
+		window.open(`/Publisherschange?pressid=${id}`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+
+	
+	function writersadd(e) {
+		window.open(`/writersadd`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+	function authorschange(e) {
+		var id = e.getAttribute('index');
+		window.open(`/authorschange?authorphone=${id}`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+
+	function orderadd(e) {
+		window.open(`/orderadd`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+	function orderchange(e) {
+		var id = e.getAttribute('index');
+		window.open(`/orderchange?orderid=${id}`, 'newwindow', 'height=400, width=350, top=300, left=600, toolbar=no, menubar=no, scrollbars=no,   resizable=no, location=no, status=no');
+	}
+
+	function bookfind(e) {
+		
+		var guanjzi = document.getElementById("selsectbookname").value;
+		var data = $.param({ "guanjzi": guanjzi }) + "&" + $("#editform").serialize() + "";
+		var who = $("input[name='leixing']:checked").val();
+		if(who == 1){
+			$.ajax({
+			url: '/selectbook',
+			type: 'post',
+			data: data,
+			processData: false,
+			success(data) {
+				var rouse = data.rouse
+				$("#main tr").remove();
+				window.alert("共查询到"+rouse.length+"条信息");
+				for (var i = 0; i < rouse.length; i++) {
+					var trtd = "<td>" + rouse[i].bookname + "</td>"
+						+ "<td>" + rouse[i].bookid + "</td>"
+						+ "<td>" + rouse[i].authorname + "</td>"
+						+ "<td>" + rouse[i].pressname + "</td>"
+						+ "<td>" + rouse[i].booktime + "</td>"
+						+ "<td>" + rouse[i].booknum + "</td>"
+						+ "<td>" + rouse[i].price + "</td>";
+					$("#main").append("<tr>" + trtd + "</tr>");
+				}
+
+			}
+			})
+		}else if(who == 2){
+			$.ajax({
+			url: '/selectPublishers',
+			type: 'post',
+			data: data,
+			processData: false,
+			success(data) {
+				var rouse = data.rouse
+				$("#main tr").remove();
+				window.alert("共查询到"+rouse.length+"条信息");
+				for (var i = 0; i < rouse.length; i++) {
+					var trtd = "<td>" + rouse[i].pressname + "</td>"
+						+ "<td>" + rouse[i].pressid + "</td>"
+						+ "<td>" + rouse[i].pressaddress + "</td>"
+					$("#main").append("<tr>" + trtd + "</tr>");
+				}
+
+			}
+			})
+		}else if(who==3){
+			$.ajax({
+			url: '/selectwriters',
+			type: 'post',
+			data: data,
+			processData: false,
+			success(data) {
+				var rouse = data.rouse
+				$("#main tr").remove();
+				window.alert("共查询到"+rouse.length+"条信息");
+				for (var i = 0; i < rouse.length; i++) {
+					var trtd = "<td>" + rouse[i].authorname + "</td>"
+						+ "<td>" + rouse[i].authorsix + "</td>"
+						+ "<td>" + rouse[i].authorphone + "</td>"
+						+ "<td>" + rouse[i].authorage + "</td>"
+					$("#main").append("<tr>" + trtd + "</tr>");
+				}
+
+			}
+			})
+		}else if(who==4){
+			$.ajax({
+			url: '/selectorder',
+			type: 'post',
+			data: data,
+			processData: false,
+			success(data) {
+				var rouse = data.rouse
+				$("#main tr").remove();
+				window.alert("共查询到"+rouse.length+"条信息");
+				for (var i = 0; i < rouse.length; i++) {
+					var trtd = "<td>" + rouse[i].orderid + "</td>"
+						+ "<td>" + rouse[i].bookname + "</td>"
+						+ "<td>" + rouse[i].ordertime + "</td>"
+						+ "<td>" + rouse[i].purchaser + "</td>"
+						+ "<td>" + rouse[i].purchaseraddress + "</td>"
+						+ "<td>" + rouse[i].purchaserphone + "</td>"
+					$("#main").append("<tr>" + trtd + "</tr>");
+				}
+
+			}
+			})
+		}
+		
+	}
+
+
+	function passwordchange(e){
+		var id = e.getAttribute('index');
+		var oldpassworld = document.getElementById("oldpassworld").value;
+		var newpassworld1 = document.getElementById("newpassworld1").value;
+		var newpassworld2 = document.getElementById("newpassworld2").value;
+		if(newpassworld1 === newpassworld2 && newpassworld1!=null){
+			var data = $.param({ "id": id }) + "&" +$.param({ "newpassworld1": newpassworld1 })
+			+ "&"+ $("#editform").serialize() + "";
+
+			$.ajax({
+                url: '/passworldchange',
+                type: 'post',
+                data: data,
+                processData:false,
+                success: function (data) {
+                    var err_code = data.err_code
+                    console.log(data)
+                    if (err_code === 0) {
+						window.alert('修改成功!');
+						window.location.href='/';
+                    } else if (err_code === 1) {
+                        window.alert('密码错误，修改失败！')
+                    }
+                  
+                }
+            })
+
+
+		}else{
+			alert("新密码不一致！");
+		}
+		
+		
+
+	}
+
+
+</script>
+
+</html>

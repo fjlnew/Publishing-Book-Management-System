@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作者修改</title>
+    <style>
+        .inpgroup{
+            height: 20px;
+            width: 500px;
+            margin-top: 20px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        .inpgroup input{
+            height: 30px;
+            width: 200px;
+            font-size: 20px;
+        }
+        button{
+            height: 40px;
+            width: 100px;
+            margin-top:40px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    {{ if author }}
+    <form id="editform" action="postServlet2" method="post">
+
+    </form>
+    <form id="changefrom">
+        <div class="inpgroup">
+            <input type="hidden" id="oldphone" name="oldphone" value="{{ author[0].authorphone }}" >
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">作家姓名:</span>
+            <input type="text" id="authorname" name="authorname" value="{{ author[0].authorname }}" >
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">作家性别:</span>
+            <input type="text" id="authorsix" name="authorsix" value="{{ author[0].authorsix }}">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">联系电话:</span>
+            <input type="text" id="authorphone" name="authorphone" value="{{ author[0].authorphone }}">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">年龄:</span>
+            <input type="text" id="authorage" name="authorage" value="{{ author[0].authorage }}">
+        </div>
+        
+        <button class="submit" type="submit">修改</button>
+    </form>
+    {{ else }}
+        出错了！！！
+    {{ /if }}
+</body>
+<script src="../public/js/jquery.js"></script>
+<script>
+    $('#changefrom').on('submit', function (e) {
+            var authorname = document.getElementById("authorname").value;
+            var authorsix = document.getElementById("authorsix").value;
+            var authorphone = document.getElementById("authorphone").value;
+            var authorage = document.getElementById("authorage").value;
+            var oldphone = document.getElementById("oldphone").value;
+
+            var data = $.param({"authorname":authorname}) + "&"+$.param({"authorsix":authorsix}) 
+            + "&"+$.param({"authorphone":authorphone}) + "&" +$.param({"authorage":authorage}) 
+            + "&"+$.param({"oldphone":oldphone}) + "&"+ $("#editform").serialize() + "";
+
+			$.ajax({
+                url: '/authorschange',
+                type: 'post',
+                data: data,
+                processData:false,
+                success: function (data) {
+                    var err_code = data.err_code
+                    console.log(data)
+                    if (err_code === 0) {
+                        window.alert('修改成功!');
+                    } else if (err_code === 1) {
+                        window.alert('输入数据有误。修改失败！')
+                    }
+                  
+                }
+            })
+        })
+</script>
+</html>

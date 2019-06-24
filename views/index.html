@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<link rel="stylesheet" type="text/css" href="../public/css/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="../public/css/loginbard.css"/>
+		<link rel="stylesheet" type="text/css" href="../public/css/animation.css"/>
+	</head>
+	<body>
+		<div class="wp animsition">
+		<div class="boardLogin">
+			<a href="#" class="logo">
+				<img src="../public/iamge/login.png">
+			</a>
+			<form id="editform" action="postServlet2" method="post">
+
+			</form>
+			<form id="loginfrom">
+				<div class="inpGroup">
+					<span class="loginIco1"></span>
+					<input type="text" id="id" name="id" placeholder="请输入您的用户名">
+				</div>
+				<div class="prompt">
+				</div>
+				
+				<div class="inpGroup">
+					<span class="loginIco2"></span>
+					<input type="password" id="password" name="password" placeholder="请输入您的密码">
+				</div>
+				<div class="prompt">
+				</div>
+				<button class="login" type="button" onclick="login()">登录</button>
+			</form>
+		</div>
+	</div>
+	<div id="particles-js"></div>
+
+	</body>
+	<script type="text/javascript" src="../public/js/jquery.js"></script>
+	<script type="text/javascript" src="../public/js/jquery.animation.js"></script>
+	<script type="text/javascript" src="../public/js/particles.js"></script>
+	<script type="text/javascript" src="../public/js/style.js"></script>
+	<script src="../node_modules/blueimp-md5/js/md5.js"></script>
+	<script type="text/javascript">
+	$(".animsition").animsition();
+	</script>
+	<script src="../public/js/indexlast.js">
+		
+    </script>
+
+</html>

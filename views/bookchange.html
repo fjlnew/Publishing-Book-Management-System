@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>书籍修改</title>
+    <style>
+        .inpgroup{
+            height: 20px;
+            width: 500px;
+            margin-top: 20px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        .inpgroup input{
+            height: 30px;
+            width: 200px;
+            font-size: 20px;
+        }
+        button{
+            height: 40px;
+            width: 100px;
+            margin-top:40px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    {{ if book }}
+    <form id="editform" action="postServlet2" method="post">
+
+    </form>
+    <form id="changefrom">
+        <div class="inpgroup">
+            <span class="loginIco1">书籍名称:</span>
+            <input type="text" id="bookname" name="bookname" value="{{ book[0].bookname }}" >
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">书籍编号:</span>
+            <input type="text" id="bookid" name="bookid" value="{{ book[0].bookid }}" readonly="readonly">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">书籍作者:</span>
+            <input type="text" id="authorname" name="authorname" value="{{ book[0].authorname }}">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">出版社:</span>
+            <input type="text" id="pressname" name="pressname" value="{{ book[0].pressname }}">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">发布时间:</span>
+            <input type="text" id="booktime" name="booktime" value="{{ book[0].booktime }}">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">剩余数量:</span>
+            <input type="text" id="booknum" name="booknum" value="{{ book[0].booknum }}">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">价格:</span>
+            <input type="text" id="price" name="price" value="{{ book[0].price}}">
+        </div>
+
+        <button class="submit" type="submit">修改</button>
+    </form>
+    {{ else }}
+        出错了！！！
+    {{ /if }}
+</body>
+<script src="../public/js/jquery.js"></script>
+<script>
+    $('#changefrom').on('submit', function (e) {
+            var bookname = document.getElementById("bookname").value;
+            var bookid = document.getElementById("bookid").value;
+            var authorname = document.getElementById("authorname").value;
+            var pressname = document.getElementById("pressname").value;
+            var booktime = document.getElementById("booktime").value;
+            var booknum = document.getElementById("booknum").value;
+            var price = document.getElementById("price").value; 
+
+            var data = $.param({"bookname":bookname}) + "&"+$.param({"bookid":bookid}) 
+            + "&"+$.param({"authorname":authorname}) + "&" +$.param({"pressname":pressname}) 
+            + "&"+$.param({"booktime":booktime}) + "&" +$.param({"booknum":booknum}) 
+            + "&"+$.param({"price":price}) + "&"+ $("#editform").serialize() + "";
+
+			$.ajax({
+                url: '/bookchange',
+                type: 'post',
+                data: data,
+                processData:false,
+                success: function (data) {
+                    var err_code = data.err_code
+                    console.log(data)
+                    if (err_code === 0) {
+                        window.alert('修改成功!');
+                    } else if (err_code === 1) {
+                        window.alert('输入数据有误。修改失败！')
+                    }
+                  
+                }
+            })
+        })
+</script>
+</html>

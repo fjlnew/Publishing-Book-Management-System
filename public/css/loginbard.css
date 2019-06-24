@@ -1,0 +1,125 @@
+html,body{
+	height: 100%;
+	overflow: hidden;
+}
+body{
+	background: url(../iamge/loginbg.jpg);
+	background-size: 100% 100%;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px transparent inset;
+        background-color: none;
+}
+.wp{
+	height: 100%;
+	position: relative;
+	z-index: 2;
+}
+#particles-js{
+	position: absolute;
+	top: 0;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
+	opacity: 0.5;
+}
+.boardLogin{
+	width: 16.8%;
+	min-width: 200px;
+	margin: 0 auto;
+	position: relative;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	-o-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.boardLogin .logo{
+	display: block;
+	margin-bottom: 40px;
+	text-align: center;
+}
+.boardLogin .logo img{
+	width: 100%;
+	max-width: 326px;
+}
+
+.boardLogin .inpGroup{
+	height: 20px;
+	padding: 14px 24px 14px 52px;
+	background: #2a658a;
+	background: rgba(255,255,255,0.1);
+	border-radius: 24px;
+	position: relative;
+}
+.boardLogin .inpGroup span{
+	display: block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 14px;
+	left: 24px;
+}
+.boardLogin .inpGroup span.loginIco1{
+	background: url(../iamge/pic1.png);
+}
+.boardLogin .inpGroup span.loginIco2{
+	background: url(../iamge/pic2.png);
+}
+.boardLogin .inpGroup input{
+	display: block;
+	width: 100%;
+	height: 20px;
+	line-height: 20px;
+	color: #fff;
+}
+.boardLogin .inpGroup input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #fff; opacity:1; 
+}
+
+.boardLogin .inpGroup input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #fff;opacity:1;
+}
+
+.boardLogin .inpGroup input:-ms-input-placeholder{
+    color: #fff;opacity:1;
+}
+
+.boardLogin .inpGroup input::-webkit-input-placeholder{
+    color: #fff;opacity:1;
+}
+.boardLogin .prompt{
+	min-height: 20px;
+	padding: 5px 24px 10px 24px;
+}
+.boardLogin p{
+	line-height: 16px;
+	font-size: 12px;
+	display: none;
+	
+}
+.boardLogin p.error{
+	color: #f60;
+}
+.boardLogin p.success{
+	color: #449d44;
+}
+.boardLogin .login{
+	width: 100%;
+	box-sizing: border-box;
+	display: block;
+	height: 40px;
+	line-height: 38px;
+	text-align: center;
+	border: 1px solid #01d1f2;
+	border-radius: 20px;
+	color: #fff;
+	cursor: pointer;
+}
+.boardLogin .login:hover{
+	background: #01d1f2;
+}

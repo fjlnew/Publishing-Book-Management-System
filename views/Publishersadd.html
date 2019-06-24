@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>出版社添加</title>
+    <style>
+        .inpgroup{
+            height: 20px;
+            width: 500px;
+            margin-top: 20px;
+            margin-left: 20px;
+            font-size: 20px;
+        }
+        .inpgroup input{
+            height: 30px;
+            width: 200px;
+            font-size: 20px;
+        }
+        button{
+            height: 40px;
+            width: 100px;
+            margin-top:40px;
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+    <form id="editform" action="postServlet2" method="post">
+
+    </form>
+    <form id="changefrom">
+        <div class="inpgroup">
+            <span class="loginIco1">出版社名称:</span>
+            <input type="text" id="pressname" name="pressname"  >
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">出版社编号:</span>
+            <input type="text" id="pressid" name="pressid">
+        </div>
+        <div class="inpgroup">
+            <span class="loginIco1">出版社地址:</span>
+            <input type="text" id="pressaddress" name="pressaddress">
+        </div>
+
+        <button class="submit" type="submit">添加</button>
+    </form>
+</body>
+<script src="../public/js/jquery.js"></script>
+<script>
+    $('#changefrom').on('submit', function (e) {
+            var pressname = document.getElementById("pressname").value;
+            var pressid = document.getElementById("pressid").value;
+            var pressaddress = document.getElementById("pressaddress").value;
+
+            var data = $.param({"pressname":pressname}) + "&"+$.param({"pressid":pressid}) 
+            + "&"+$.param({"pressaddress":pressaddress})+ "&"+ $("#editform").serialize() + "";
+            
+			$.ajax({
+                url: '/Publishersadd',
+                type: 'post',
+                data: data,
+                processData:false,
+                success: function (data) {
+                    var err_code = data.err_code
+                    console.log(data)
+                    if (err_code === 0) {
+                        window.alert('添加成功!');
+                    } else if (err_code === 1) {
+                        window.alert('输入数据有误。添加失败！')
+                    }
+                  
+                }
+            })
+        })
+</script>
+</html>
